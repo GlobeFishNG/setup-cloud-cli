@@ -10,9 +10,12 @@ export interface AliyunParameters {
 export async function runAliyun(params: AliyunParameters): Promise<void> {
   // eslint-disable-next-line i18n-text/no-en
   core.info(`Setup aliyun for region ${params.region}`);
+  core.setSecret(params.accessKeyId);
+  core.setSecret(params.secretAccessKey);
   const aliyunCli = 'aliyun';
   const args = [
     'configure',
+    'set',
     '--profile',
     'default',
     '--mode',
