@@ -1,0 +1,11 @@
+name: 'Configure Cloud CLI'
+description: 'Configure Cloud CLI, AWS, Aliyun, etc.'
+author: 'GlobeFishNG'
+inputs:
+  profile:
+    required: true
+    description: 'Profile name: default/aws-us/aws-cn/aliyun'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+  post: 'dist/cleanup/index.js'
