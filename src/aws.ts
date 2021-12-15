@@ -444,8 +444,9 @@ function sanitizeGithubWorkflowName(name: string): string {
 }
 
 export async function getAliyunCredentials(
-  prefix: string
+  prefix: string, region: string
 ): Promise<{accessKeyId: string; secretAccessKey: string}> {
+  exportRegion(region);
   const ssm = new aws.SSM();
 
   const accessKeyId = await ssm

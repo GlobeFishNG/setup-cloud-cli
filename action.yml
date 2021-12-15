@@ -1,6 +1,9 @@
 name: 'Configure Cloud CLI'
 description: 'Configure Cloud CLI, AWS, Aliyun, etc.'
 author: 'GlobeFishNG'
+branding: 
+  icon: cloud
+  color: yellow
 inputs:
   profile:
     required: true

@@ -45,7 +45,8 @@ async function run(): Promise<void> {
     let roleToAssume = `${AWS_US_ACTIONS_ROLE_ARN_PREFIX}${repo}`;
 
     const {accessKeyId, secretAccessKey} = await getAliyunCredentials(
-      ALIYUN_ACTIONS_CRED_PREFIX as string
+      ALIYUN_ACTIONS_CRED_PREFIX as string,
+      AWS_US_REGION as string
     );
 
     switch (profile) {
