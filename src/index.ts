@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import assert from 'assert';
 // eslint-disable-next-line sort-imports
-import {getAliyunCredentials, runAWS} from './aws';
+import {getAliyunCredentials, runAWS, unsetAWSCredentials} from './aws';
 import {runAliyun} from './aliyun';
 
 const {
@@ -16,6 +16,7 @@ const {
 
 async function run(): Promise<void> {
   try {
+    unsetAWSCredentials();
     const profile = core.getInput('profile', {required: true}).toLowerCase();
     let region: string = AWS_US_REGION || 'us-east-1';
 
@@ -51,6 +52,7 @@ async function run(): Promise<void> {
 
     switch (profile) {
       case 'aliyun':
+      case 'aliyun-prod':
         region = ALIYUN_REGION || 'cn-hangzhou';
         await runAliyun({
           accessKeyId,

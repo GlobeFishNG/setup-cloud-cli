@@ -107,6 +107,18 @@ function exportCredentials(params: Credentials): void {
   }
 }
 
+export function unsetAWSCredentials(): void {
+  const awsCredentialsVars = [
+    'AWS_ACCESS_KEY_ID',
+    'AWS_SECRET_ACCESS_KEY',
+    'AWS_SESSION_TOKEN'
+  ];
+
+  for (const key of awsCredentialsVars) {
+    core.exportVariable(key, '');
+  }
+}
+
 function exportRegion(region: string): void {
   // AWS_DEFAULT_REGION and AWS_REGION:
   // Specifies the AWS Region to send requests to
@@ -168,7 +180,7 @@ export async function runAWS(params: AWSParameters): Promise<void> {
     if (!region.match(REGION_REGEX)) {
       throw new Error(`Region is not valid: ${region}`);
     }
-    
+
     exportRegion(region);
 
     // This wraps the logic for deciding if we should rely on the GH OIDC provider since we may need to reference
@@ -311,7 +323,7 @@ async function assumeRole(params: AssumeRoleParams): Promise<Credentials> {
       GITHUB_REPOSITORY,
       GITHUB_WORKFLOW,
       GITHUB_ACTION,
-      GITHUB_ACTOR,
+      GITHUB_ACTOR
       // GITHUB_SHA
     ].every(isDefined),
     'Missing required environment value. Are you running in GitHub Actions?'
@@ -444,7 +456,8 @@ function sanitizeGithubWorkflowName(name: string): string {
 }
 
 export async function getAliyunCredentials(
-  prefix: string, region: string
+  prefix: string,
+  region: string
 ): Promise<{accessKeyId: string; secretAccessKey: string}> {
   exportRegion(region);
   const ssm = new aws.SSM();
