@@ -7,7 +7,7 @@ branding:
 inputs:
   profile:
     required: true
-    description: 'Profile name: default/aws-us/aws-cn/aliyun'
+    description: 'Profile name: default/aws-us/aws-cn/aliyun/aliyun-prod'
 runs:
   using: 'node12'
   main: 'dist/index.js'
