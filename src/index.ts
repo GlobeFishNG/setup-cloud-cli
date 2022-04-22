@@ -6,6 +6,7 @@ import {runAliyun} from './aliyun';
 
 const {
   AWS_US_ACTIONS_ROLE_ARN_PREFIX,
+  AWS_US_PROD_ACTIONS_ROLE_ARN_PREFIX,
   AWS_CN_ACTIONS_ROLE_ARN_PREFIX,
   ALIYUN_ACTIONS_CRED_PREFIX,
   AWS_US_REGION,
@@ -23,6 +24,7 @@ async function run(): Promise<void> {
     assert(
       [
         AWS_US_ACTIONS_ROLE_ARN_PREFIX,
+        AWS_US_PROD_ACTIONS_ROLE_ARN_PREFIX,
         AWS_CN_ACTIONS_ROLE_ARN_PREFIX,
         ALIYUN_ACTIONS_CRED_PREFIX
       ].every(v => !!v),
@@ -65,6 +67,10 @@ async function run(): Promise<void> {
       case 'aws-cn':
         region = AWS_CN_REGION || 'cn-northwest-1';
         roleToAssume = `${AWS_CN_ACTIONS_ROLE_ARN_PREFIX}${repo}`;
+      // eslint-disable-next-line no-fallthrough
+      case 'aws-prod':
+        region = AWS_US_REGION || 'us-east-1';
+        roleToAssume = `${AWS_US_PROD_ACTIONS_ROLE_ARN_PREFIX}${repo}`;
       // eslint-disable-next-line no-fallthrough
       case 'aws-us':
       case 'default':
