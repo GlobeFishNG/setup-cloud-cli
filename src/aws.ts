@@ -108,6 +108,7 @@ function exportCredentials(params: Credentials): void {
 }
 
 export function unsetAWSCredentials(): void {
+  core.info('unsetAWSCredentials');
   const awsCredentialsVars = [
     'AWS_ACCESS_KEY_ID',
     'AWS_SECRET_ACCESS_KEY',
@@ -462,6 +463,7 @@ export async function getAliyunCredentials(
   prefix: string,
   region: string
 ): Promise<{accessKeyId: string; secretAccessKey: string}> {
+  core.info('getAliyunCredentials');
   exportRegion(region);
   const ssm = new aws.SSM();
 
