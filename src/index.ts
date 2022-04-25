@@ -67,6 +67,12 @@ async function run(): Promise<void> {
       case 'aws-cn':
         region = AWS_CN_REGION || 'cn-northwest-1';
         roleToAssume = `${AWS_CN_ACTIONS_ROLE_ARN_PREFIX}${repo}`;
+        await runAWS({
+          region,
+          roleToAssume,
+          roleDurationSeconds: 3600
+        });
+        break;
       // eslint-disable-next-line no-fallthrough
       case 'aws-prod':
         region = AWS_US_REGION || 'us-east-1';
